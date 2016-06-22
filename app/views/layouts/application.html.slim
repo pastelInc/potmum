@@ -12,7 +12,7 @@ html
             input type='search' name='q' value=@search_word placeholder='キーワードを入力'
         .uk-navbar-flip
           ul.uk-navbar-nav
-            - if current_user
+            - if current_user.member?
               li
                 a href=new_article_path(name: current_user.name)
                   i.fa.fa-plus

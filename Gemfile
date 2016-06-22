@@ -10,6 +10,7 @@ gem 'grape'
 gem 'grape-rabl'
 gem 'grape-swagger'
 gem 'grape-swagger-rails'
+gem 'pundit'
 
 gem 'slim-rails'
 gem 'sass-rails', '~> 5.0'

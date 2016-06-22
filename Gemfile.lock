@@ -277,6 +277,8 @@ GEM
     pry-rails (0.3.4)
       pry (>= 0.9.10)
     puma (3.4.0)
+    pundit (1.1.0)
+      activesupport (>= 3.0.0)
     pygments.rb (0.6.3)
       posix-spawn (~> 0.3.6)
       yajl-ruby (~> 1.2.0)
@@ -466,6 +468,7 @@ DEPENDENCIES
   pry-byebug
   pry-rails
   puma
+  pundit
   qiita-markdown!
   quiet_assets
   rabl

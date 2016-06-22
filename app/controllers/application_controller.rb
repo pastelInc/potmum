@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include Pundit
+
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -15,8 +17,11 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    return nil unless session[:user_id]
-    @current_user ||= User.find_by(id: session[:user_id].to_i)
+    @current_user ||=
+      begin
+        user = session[:user_id] ? User.find_by(id: session[:user_id].to_i) : nil
+        user || User.new
+      end
   end
 
   def render_json(target, status: 200, message: '')
@@ -30,7 +35,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_login!
-    raise Errors::Unauthorized unless current_user
+    raise Errors::Unauthorized if current_user.guest?
   end
 
   alias private_mode! require_login!
@@ -42,6 +47,7 @@ class ApplicationController < ActionController::Base
   rescue_from Exception, with: :render_500 unless Rails.env.development?
   rescue_from Errors::BadRequest, with: :render_400
   rescue_from Errors::Forbidden, with: :render_403
+  rescue_from Pundit::NotAuthorizedError, with: :render_403
   rescue_from Errors::Unauthorized, with: :render_401
   rescue_from ActiveRecord::RecordNotFound, with: :render_404
   rescue_from ActionController::RoutingError, with: :render_404 unless Rails.env.development?

@@ -27,11 +27,7 @@ class ArticlesController < ApplicationController
 
   # GET /@:name/items/:id
   def show
-    unless @article.published?
-      check_owner!
-      redirect_to edit_article_path(@article, name: current_user)
-      return
-    end
+    authorize @article
 
     view_countup
 

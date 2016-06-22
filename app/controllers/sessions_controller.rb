@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     auth = request.env['omniauth.auth']
     redirect_to '/' unless auth
 
-    if current_user
+    if current_user.member?
       # TODO: ログイン中は既存アカウントとのヒモ付処理へ
       redirect_to '/'
     else

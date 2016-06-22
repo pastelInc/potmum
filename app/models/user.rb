@@ -37,6 +37,18 @@ class User < ActiveRecord::Base
     name
   end
 
+  def stocked?(article)
+    stocks.where(article_id: article.id).exists?
+  end
+
+  def guest?
+    id.blank?
+  end
+
+  def member?
+    id.present?
+  end
+
   def link_to_auth(auth)
     return false if authentications.where(provider: auth['provider']).exists?
     Authentication.create(user: self, provider: auth['provider'], uid: auth['uid'])
@@ -44,10 +56,6 @@ class User < ActiveRecord::Base
 
   def link_to_auth!(auth)
     link_to_auth(auth) || raise('failed')
-  end
-
-  def stocked?(article)
-    stocks.where(article_id: article.id).exists?
   end
 
   def self.find_by_auth(auth)
