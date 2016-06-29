@@ -59,6 +59,14 @@ module GlobalSetting
         }
       end
 
+      # Identity
+      if ENV['USE_IDENTITY'].to_i != 0
+        methods << {
+          name: 'Identity',
+          path: 'identity'
+        }
+      end
+
       methods
     end
   end

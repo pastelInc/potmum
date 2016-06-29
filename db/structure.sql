@@ -38,6 +38,7 @@ CREATE INDEX "index_revisions_on_published_at" ON "revisions" ("published_at");
 CREATE INDEX "index_revisions_on_revision_type" ON "revisions" ("revision_type");
 CREATE TABLE "access_tokens" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "token_type" integer DEFAULT 0, "permit_type" integer DEFAULT 0, "title" varchar(32), "token" varchar(128) NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL);
 CREATE INDEX "index_access_tokens_on_user_id" ON "access_tokens" ("user_id");
+CREATE TABLE "identities" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "password_digest" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL);
 INSERT INTO schema_migrations (version) VALUES ('20150722154057');
 
 INSERT INTO schema_migrations (version) VALUES ('20150722154204');
@@ -61,4 +62,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150812165100');
 INSERT INTO schema_migrations (version) VALUES ('20160426162535');
 
 INSERT INTO schema_migrations (version) VALUES ('20160610180448');
+
+INSERT INTO schema_migrations (version) VALUES ('20160629142908');
 

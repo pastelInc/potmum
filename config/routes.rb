@@ -56,7 +56,8 @@ Rails.application.routes.draw do
   post '/register' => 'users#create'
   resource :session, only: [:destroy]
 
-  get '/auth/:provider/callback' => 'sessions#callback', as: :auth_callback
+  get '/auth/:provider/callback' => 'sessions#callback'
+  post '/auth/:provider/callback' => 'sessions#callback'
   get '/auth/failure' => 'sessions#failure', as: :auth_failure
 
   # The priority is based upon order of creation: first created -> highest priority.

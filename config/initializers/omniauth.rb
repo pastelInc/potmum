@@ -35,4 +35,9 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   if ENV['USE_TWITTER']
     provider :twitter, ENV['TWITTER_KEY'], ENV['TWITTER_SECRET']
   end
+
+  # Identity
+  if ENV['USE_IDENTITY']
+    provider :identity
+  end
 end

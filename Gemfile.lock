@@ -82,6 +82,9 @@ GEM
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
+    bcrypt (3.1.11)
+    bcrypt-ruby (3.1.5)
+      bcrypt (>= 3.1.3)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -249,6 +252,9 @@ GEM
     omniauth-github (1.1.2)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.1)
+    omniauth-identity (1.1.1)
+      bcrypt-ruby (~> 3.0)
+      omniauth (~> 1.0)
     omniauth-oauth (1.1.0)
       oauth
       omniauth (~> 1.0)
@@ -460,6 +466,7 @@ DEPENDENCIES
   omniauth
   omniauth-github
   omniauth-google-oauth2!
+  omniauth-identity
   omniauth-slack
   omniauth-twitter
   pg
