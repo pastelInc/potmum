@@ -1,0 +1,10 @@
+log
+tmp
+db/*.sqlite3
+db/*.sqlite3-journal
+node_modules
+public/attachment_files
+public/assets
+public/js
+vendor/bundle
+.bundle

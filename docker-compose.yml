@@ -1,0 +1,49 @@
+version: '2'
+
+services:
+  app:
+    build: .
+    depends_on:
+      - db
+      - storage
+    links:
+      - db
+    restart: always
+    networks:
+      - potmumnet
+    ports:
+      - "7272:7272"
+    volumes_from:
+      - storage
+    environment:
+      - USE_ATTACHMENT_FILE=1
+      - VIRTUAL_PORT=7272
+      - ROOT_URL=http://potmum.io
+      - VIRTUAL_HOST=potmum.io
+      - PRIVATE_MODE=0
+      - USE_IDENTITY=1
+      - DATABASE_URL=postgres://potmum:potmum@db/potmum
+  db:
+    depends_on:
+      - storage
+    image: postgres:latest
+    restart: always
+    networks:
+      - potmumnet
+    volumes_from:
+      - storage
+    environment:
+      - POSTGRES_PASSWORD=potmum
+      - POSTGRES_USER=potmum
+      - POSTGRES_DB=potmum
+  storage:
+    restart: always
+    image: busybox:latest
+    networks:
+      - potmumnet
+    volumes:
+      - /data
+      - /var/lib/postgresql/data
+
+networks:
+  potmumnet:
